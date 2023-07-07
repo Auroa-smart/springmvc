@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.dao.UserMapper">
+    <select id="queryAllUser" resultType="Users">
+        select * from library.users
+    </select>
+
+    <select id="likeSelectUser" resultType="Users" >
+        select username, password, email, phone,address, rolename, img_path
+        from library.users where `username` like "%"#{name}"%"
+    </select>
+
+    <delete id="deleteUserById" parameterType="int" >
+        delete from library.users
+        where user_id = #{user_id,jdbcType=INTEGER}
+    </delete>
+    <insert id="addUser" parameterType="Users" >
+        insert into library.users(username, password,  email, phone, address, rolename, img_path, created_time)
+        values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},
+                #{address,jdbcType=VARCHAR}, #{rolename,jdbcType=VARCHAR}, #{img_path,jdbcType=VARCHAR},#{created_time,jdbcType=DATE})
+    </insert>
+    <select id="queryUserById" resultType="Users" parameterType="java.lang.Integer" >
+        select username, password, email, phone,address, rolename, img_path
+        from library.users
+        where user_id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="queryUserByName" resultType="Users">
+        select username, password, email, phone,address, rolename, img_path
+        from library.users
+        where username = #{username,jdbcType=VARCHAR}
+    </select>
+    <select id="queryLikeByName" resultType="Users">
+        select username, password, email, phone,address, rolename, img_path
+        from library.users
+        where username LIKE concat('%',#{username,jdbcType=VARCHAR},'%')
+    </select>
+
+    <!--更新User-->
+    <update id="updateUser" parameterType="Users">
+        update library.users
+        set username = #{username},password = #{password},email = #{email},phone=#{phone},address=#{address}
+        where user_id = #{user_id} and rolename not LIKE '管理员'
+    </update>
+
+
+
+</mapper>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="springmvc-06-ssm:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/springmvc_06_ssm_jar</output-path>
+    <root id="archive" name="springmvc-06-ssm.jar">
+      <element id="module-output" name="library-springmvc" />
+    </root>
+  </artifact>
+</component>
